@@ -23,6 +23,7 @@
   "homepage": "https://github.com/srldl/repeat_test#readme",
   "devDependencies": {
     "browserify": "^11.0.1",
-    "http-server": "^0.8.0"
+    "http-server": "^0.8.0",
+    "vinyl-fs": "^1.0.0"
   }
 }

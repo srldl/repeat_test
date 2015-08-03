@@ -4,7 +4,6 @@ var angular = require('angular');
 // Angular modules
 var angular_route = require('angular-route');
 
-
 var app = angular.module('repeat-testApp',[
   'ngRoute',
   'repeat-testControllers'
@@ -12,9 +11,8 @@ var app = angular.module('repeat-testApp',[
 
   console.log("test");
 
-  require('./controller');
-
-
+  // Controllers
+  app.controller('BaseCtrl', require('./controller'));
 
   app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
@@ -22,7 +20,7 @@ var app = angular.module('repeat-testApp',[
         templateUrl: 'index.html',
         controller: 'BaseCtrl',
       }).
-      when('/project', {
+      when('/src/edit.html', {
         templateUrl: 'src/edit.html',
         controller: 'BaseCtrl',
       }).
