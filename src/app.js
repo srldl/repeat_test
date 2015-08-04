@@ -20,7 +20,7 @@ var app = angular.module('repeat-testApp',[
         templateUrl: 'index.html',
         controller: 'BaseCtrl',
       }).
-      when('/src/edit.html', {
+      when('/edit.html', {
         templateUrl: 'src/edit.html',
         controller: 'BaseCtrl',
       }).

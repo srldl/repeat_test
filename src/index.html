@@ -9,17 +9,23 @@
 </head>
 <body>
     <!-- project link -->
-    <a href="./src/edit.html">edit</a>
+    <a href="edit.html">edit</a>
 
     <!-- include browserify -->
      <script src="bundle.js"></script>
 
      <p> &nbsp;</p>
      <div ng-controller="BaseCtrl">
-   <!--  <p ng-repeat="bird in birds">  -->
-         <b>{{ birds }}&nbsp;</b>
- <!--    </p>  -->
-    </div>
+         <b>{{ choices }}&nbsp;</b>
+
+
+    <div class="form-group" data-ng-repeat="choice in choices">
+  <label for="choice" ng-show="showChoiceLabel(choice)">Choices</label>
+  <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add another choice</button>
+  <input type="text" ng-model="choice.id" name="" placeholder="Enter a bird name">
+</div>
+
+</div>
 
 </body>
 </html>
