@@ -12,7 +12,8 @@ var app = angular.module('repeat-testApp',[
   console.log("test");
 
   // Controllers
-  app.controller('BaseCtrl', require('./controller'));
+//  app.controller('repeat_testControllers', require('repeat_testControllers'));
+  var BaseCtrl = require('./controller.js');
 
   app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
@@ -20,8 +21,12 @@ var app = angular.module('repeat-testApp',[
         templateUrl: 'index.html',
         controller: 'BaseCtrl',
       }).
+      when('/index.html', {
+        templateUrl: 'index.html',
+        controller: 'BaseCtrl',
+      }).
       when('/edit.html', {
-        templateUrl: 'src/edit.html',
+        templateUrl: 'edit.html',
         controller: 'BaseCtrl',
       }).
       otherwise({

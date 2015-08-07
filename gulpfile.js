@@ -1,25 +1,36 @@
-/* Gulpfile
-add uglify,
-pipe to dest output
-*/
+'use strict';
 
-var gulp = require('gulp'),
-   uglify = require('gulp-uglify'),
-   browserSync = require('browser-sync');
+var gulp       = require('gulp'),
+    browserify = require('browserify'),
+    source     = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    uglify = require('gulp-uglify'),
+    jshint = require('gulp-jshint'),
+    concat = require('gulp-concat'),
+    browserSync = require('browser-sync');
 
-/* Run browser-sync before default */
-gulp.task('default', ['browser-sync'], function () {
-   gulp.src('src/*.js')
-      .pipe(uglify())
-      .pipe(gulp.dest('dest/'))
+
+gulp.task('browserify', function() {
+    return browserify({ entries: ['src/app.js'] })
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'));
 });
 
+gulp.task('minify', function () {
+    return gulp.src('src/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(uglify())
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('build'));
+});
 
 gulp.task('browser-sync', function () {
    var files = [
       'src/*.html',
-    //  'app/assets/css/**/*.css',
-    //  'app/assets/imgs/**/*.png',
       'src/*.js'
    ];
 
@@ -29,3 +40,6 @@ gulp.task('browser-sync', function () {
       }
    });
 });
+
+
+gulp.task('default', ['browserify','minify', 'browser-sync'] );
