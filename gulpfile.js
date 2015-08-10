@@ -11,16 +11,16 @@ var gulp       = require('gulp'),
 
 
 gulp.task('browserify', function() {
-    return browserify({ entries: ['src/app.js'] })
+    return browserify({ entries: ['app.js'] })
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('.'));
 });
 
 gulp.task('minify', function () {
-    return gulp.src('src/*.js')
+    return gulp.src('*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(uglify())
@@ -30,13 +30,13 @@ gulp.task('minify', function () {
 
 gulp.task('browser-sync', function () {
    var files = [
-      'src/*.html',
-      'src/*.js'
+      '*.html',
+      '*.js'
    ];
 
    browserSync.init(files, {
       server: {
-         baseDir: './src'
+         baseDir: '.'
       }
    });
 });
