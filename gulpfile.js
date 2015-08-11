@@ -15,28 +15,30 @@ gulp.task('browserify', function() {
     return browserify({ entries: ['./app.js'] })
         .on('error', notify.onError({message: '<%= error.message %>', title: 'Gulp browserify'}))
         .bundle()
-        .pipe(source('bundle.js'))
+        .pipe(source('./bundle.js'))
         .pipe(buffer())
         .pipe(gulp.dest('.'));
 });
 
 gulp.task('lint', function() {
-  gulp.src('*.js')
+  gulp.src('./src/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
 });
 
 gulp.task('minify', function () {
-    gulp.src('*.js')
+    gulp.src('./src/*.js')
         .pipe(uglify())
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('browser-sync', function () {
    var files = [
       '*.html',
-      '*.js'
+      '*.js',
+      './src/*.html',
+      './src/*.js'
    ];
 
    browserSync.init(files, {

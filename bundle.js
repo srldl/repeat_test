@@ -3,19 +3,23 @@
 var angular = require('angular');
 require('angular-route');
 
+
 var app = angular.module('repeatApp', [ 'ngRoute' ]);
 
 //app.constant('VERSION', require('../package.json').version);
 
 //require controllers
-app.controller('BaseCtrl', require('./baseController'));
+app.controller('BaseCtrl', require('./src/baseController'));
 
 
 app.config(function($routeProvider) {
   'use strict';
-
+  $routeProvider.when('/', {
+    templateUrl: '/src/base.html',
+    controller: 'BaseCtrl',
+  })
   $routeProvider.when('/todos', {
-    templateUrl: './base.html',
+    templateUrl: '/src/base.html',
     controller: 'BaseCtrl',
   })
   .otherwise({
@@ -23,19 +27,7 @@ app.config(function($routeProvider) {
   });
 });
 
-},{"./baseController":2,"angular":6,"angular-route":4}],2:[function(require,module,exports){
-
-//var TodoControllers = angular.module('TodoControllers', []);
-
-module.exports = function($scope) {
-//TodoControllers.controller('TodoCtrl',
-//	 ['$scope', function( $scope) {
-     'use strict';
-		 $scope.entries = ['maillard','swan','bluethroat'];
-//}]);
-};
-
-},{}],3:[function(require,module,exports){
+},{"./src/baseController":6,"angular":5,"angular-route":3}],2:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.3
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -1029,11 +1021,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":3}],5:[function(require,module,exports){
+},{"./angular-route":2}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.3
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -29398,8 +29390,20 @@ var minlengthDirective = function() {
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":5}]},{},[1]);
+},{"./angular":4}],6:[function(require,module,exports){
+
+//var TodoControllers = angular.module('TodoControllers', []);
+
+module.exports = function($scope) {
+//TodoControllers.controller('TodoCtrl',
+//	 ['$scope', function( $scope) {
+     'use strict';
+		 $scope.entries = ['maillard','swan','bluethroat'];
+//}]);
+};
+
+},{}]},{},[1]);
