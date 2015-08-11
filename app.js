@@ -1,7 +1,7 @@
-'use strict';
 
 var angular = require('angular');
 require('angular-route');
+
 
 var app = angular.module('repeatApp', [ 'ngRoute' ]);
 
@@ -12,6 +12,7 @@ app.controller('BaseCtrl', require('./baseController'));
 
 
 app.config(function($routeProvider) {
+  'use strict';
 
   $routeProvider.when('/todos', {
     templateUrl: './base.html',

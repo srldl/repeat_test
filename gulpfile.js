@@ -8,24 +8,29 @@ var gulp       = require('gulp'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     browserSync = require('browser-sync');
+     var notify = require('gulp-notify');
 
 
 gulp.task('browserify', function() {
-    return browserify({ entries: ['app.js'] })
+    return browserify({ entries: ['./app.js'] })
+        .on('error', notify.onError({message: '<%= error.message %>', title: 'Gulp browserify'}))
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(buffer())
-        .pipe(uglify())
         .pipe(gulp.dest('.'));
 });
 
+gulp.task('lint', function() {
+  gulp.src('*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+});
+
 gulp.task('minify', function () {
-    return gulp.src('*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+    gulp.src('*.js')
         .pipe(uglify())
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('browser-sync', function () {
@@ -42,4 +47,4 @@ gulp.task('browser-sync', function () {
 });
 
 
-gulp.task('default', ['browserify','minify', 'browser-sync'] );
+gulp.task('default', ['browserify', 'browser-sync'] );
